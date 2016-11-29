@@ -1,4 +1,4 @@
-package com.example.atavoosi.guitarspeedtrainer;
+package com.tavous.eartraining.musicaleartraining;
 
 import android.app.Application;
 

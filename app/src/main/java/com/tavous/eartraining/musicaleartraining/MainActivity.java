@@ -1,22 +1,37 @@
-package com.example.atavoosi.guitarspeedtrainer;
+package com.tavous.eartraining.musicaleartraining;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    //Task
+    private MediaPlayer mp;
+    TextView tvNoteName;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -24,6 +39,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private DrawerLayout drawer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,19 +48,75 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        tvNoteName = (TextView) findViewById(R.id.NoteName);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        Thread thread = new Thread(new ExecuteSessionRunnable());
+        thread.start();
+
+    };
+
+    public class ExecuteSessionRunnable implements Runnable {
+
+        @Override
+        public void run() {
+
+            InputStream session = getResources().openRawResource(R.raw.session1);
+
+            try {
+                String sessionContent = inputStreamToString(session);
+
+                Gson gson = new Gson();
+                Session s = gson.fromJson(sessionContent, Session.class);
+
+                for (final Session.Note note : s.Note) {
+                    try {
+                        mp = MediaPlayer.create(MainActivity.this, R.raw.tick1);
+                        mp.start();
+                        tvNoteName.post(new Runnable() {
+                            public void run() {
+                                tvNoteName.setText(note.Name);
+                            }
+                        });
+                        Log.d("Ali", String.valueOf(note.Duration) + "___" + note.Name);
+                        Thread.sleep(note.Duration);
+                    } catch (InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+
+            } catch (Exception e) {
+            }
+        }
+
+    }
+
+    private String inputStreamToString(InputStream session) throws IOException {
+        Writer writer = new StringWriter();
+        char[] buffer = new char[1024];
+        try {
+            Reader reader = new BufferedReader(new InputStreamReader(session, "UTF-8"));
+            int n;
+            while ((n = reader.read(buffer)) != -1) {
+                writer.write(buffer, 0, n);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return writer.toString();
     }
 
     @Override
