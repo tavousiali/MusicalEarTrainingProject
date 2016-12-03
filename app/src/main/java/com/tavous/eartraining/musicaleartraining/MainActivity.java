@@ -1,6 +1,7 @@
 package com.tavous.eartraining.musicaleartraining;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -11,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -62,7 +65,9 @@ public class MainActivity extends AppCompatActivity
         Thread thread = new Thread(new ExecuteSessionRunnable());
         thread.start();
 
-    };
+    }
+
+    ;
 
     public class ExecuteSessionRunnable implements Runnable {
 
@@ -79,11 +84,17 @@ public class MainActivity extends AppCompatActivity
 
                 for (final Session.Note note : s.Note) {
                     try {
-                        mp = MediaPlayer.create(MainActivity.this, R.raw.tick1);
-                        mp.start();
+
                         tvNoteName.post(new Runnable() {
                             public void run() {
+                                Animation anim_fade_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
                                 tvNoteName.setText(note.Name);
+                                tvNoteName.setBackgroundColor(Color.parseColor(GetColorCode(note.Name)));
+                                tvNoteName.setTextColor(Color.parseColor("#ffffff"));
+                                tvNoteName.startAnimation(anim_fade_in);
+
+                                mp = MediaPlayer.create(MainActivity.this, GetNoteSoundId(note.Name));
+                                mp.start();
                             }
                         });
                         Log.d("Ali", String.valueOf(note.Duration) + "___" + note.Name);
@@ -97,6 +108,68 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
+    }
+
+    private String GetColorCode(String noteName) {
+        String ColorCode;
+        switch (noteName) {
+            case "A":
+                ColorCode = "#3C00FF";
+                break;
+            case "B":
+                ColorCode = "#FF00FD";
+                break;
+            case "C":
+                ColorCode = "#FF0000";
+                break;
+            case "D":
+                ColorCode = "#DB7B00";
+                break;
+            case "E":
+                ColorCode = "#E4ED00";
+                break;
+            case "F":
+                ColorCode = "#81D700";
+                break;
+            case "G":
+                ColorCode = "#00FFEA";
+                break;
+            default:
+                ColorCode = "#000000";
+        }
+
+        return ColorCode;
+    }
+
+    private int GetNoteSoundId(String noteName) {
+        int SoundId;
+        switch (noteName) {
+            case "A":
+                SoundId = R.raw.a;
+                break;
+            case "B":
+                SoundId = R.raw.b;
+                break;
+            case "C":
+                SoundId = R.raw.c;
+                break;
+            case "D":
+                SoundId = R.raw.d;
+                break;
+            case "E":
+                SoundId = R.raw.e;
+                break;
+            case "F":
+                SoundId = R.raw.f;
+                break;
+            case "G":
+                SoundId = R.raw.g;
+                break;
+            default:
+                SoundId = R.raw.a;
+        }
+
+        return SoundId;
     }
 
     private String inputStreamToString(InputStream session) throws IOException {
