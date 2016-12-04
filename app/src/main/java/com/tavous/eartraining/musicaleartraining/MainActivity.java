@@ -88,11 +88,18 @@ public class MainActivity extends AppCompatActivity
                         tvNoteName.post(new Runnable() {
                             public void run() {
                                 Animation anim_fade_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
-                                tvNoteName.setText(note.Name);
+                                if (note.Show)
+                                    tvNoteName.setText(GetNoteText(note.Name));
+                                else
+                                    tvNoteName.setText("");
                                 tvNoteName.setBackgroundColor(Color.parseColor(GetColorCode(note.Name)));
                                 tvNoteName.setTextColor(Color.parseColor("#ffffff"));
                                 tvNoteName.startAnimation(anim_fade_in);
 
+                                if (mp != null) {
+                                    mp.release();
+                                    mp = null;
+                                }
                                 mp = MediaPlayer.create(MainActivity.this, GetNoteSoundId(note.Name));
                                 mp.start();
                             }
@@ -120,6 +127,7 @@ public class MainActivity extends AppCompatActivity
                 ColorCode = "#FF00FD";
                 break;
             case "C":
+            case "C2":
                 ColorCode = "#FF0000";
                 break;
             case "D":
@@ -165,6 +173,9 @@ public class MainActivity extends AppCompatActivity
             case "G":
                 SoundId = R.raw.g;
                 break;
+            case "C2":
+                SoundId = R.raw.c2;
+                break;
             default:
                 SoundId = R.raw.a;
         }
@@ -172,6 +183,45 @@ public class MainActivity extends AppCompatActivity
         return SoundId;
     }
 
+    private String GetNoteText(String noteName) {
+        String NoteText;
+        switch (noteName) {
+            case "A":
+            case "a":
+                NoteText = "A";
+                break;
+            case "B":
+            case "b":
+                NoteText ="B";
+                break;
+            case "C":
+            case "c":
+            case "C2":
+            case "c2":
+                NoteText = "C";
+                break;
+            case "D":
+            case "d":
+                NoteText = "D";
+                break;
+            case "E":
+            case "e":
+                NoteText = "E";
+                break;
+            case "F":
+            case "f":
+                NoteText = "F";
+                break;
+            case "G":
+            case "g":
+                NoteText = "G";
+                break;
+            default:
+                NoteText = "A";
+        }
+
+        return NoteText;
+    }
     private String inputStreamToString(InputStream session) throws IOException {
         Writer writer = new StringWriter();
         char[] buffer = new char[1024];
