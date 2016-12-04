@@ -3,34 +3,21 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="وارد کردن" />
+            android:id="@+id/mainPage"
+            android:icon="@drawable/ic_menu_home"
+            android:title="@string/title_activity_mainpage"/>
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="گالری" />
+            android:id="@+id/about"
+            android:icon="@drawable/ic_menu_about"
+            android:title="@string/title_activity_about"/>
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="نمایش تصاویر" />
+            android:id="@+id/contactus"
+            android:icon="@drawable/ic_menu_contactus"
+            android:title="@string/title_activity_contactus"/>
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="ابزارها" />
+            android:id="@+id/similarapp"
+            android:icon="@drawable/ic_menu_similar_app"
+            android:title="@string/title_activity_similarapp"/>
     </group>
-
-    <item android:title="بیشتر">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="اشتراک گذاری" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="ارسال" />
-        </menu>
-    </item>
 
 </menu>

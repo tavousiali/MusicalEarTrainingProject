@@ -1,9 +1,14 @@
 <resources>
-    <string name="app_name">Musical Ear Training</string>
+    <string name="app_name">گوش موسیقیایی</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
     <string name="navigetion_icon">navigetion_icon</string>
+    <string name="title_activity_setting">تنظیمات</string>
+    <string name="title_activity_about">درباره نرم افزار</string>
+    <string name="title_activity_contactus">تماس با ما</string>
+    <string name="title_activity_similarapp">برنامه های مشابه</string>
+    <string name="title_activity_mainpage">صفحه نخست</string>
 </resources>
