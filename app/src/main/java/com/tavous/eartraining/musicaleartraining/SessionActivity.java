@@ -1,14 +1,17 @@
 package com.tavous.eartraining.musicaleartraining;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -31,11 +34,14 @@ public class SessionActivity extends BaseNavigationActivity {
     private MediaPlayer mp;
     TextView tvNoteName;
     Thread thread;
+    Button start, stop;
+    boolean isStop = false;
 
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.setContent(R.layout.activity_session);
@@ -43,16 +49,23 @@ public class SessionActivity extends BaseNavigationActivity {
         super.onCreate(savedInstanceState);
 
         tvNoteName = (TextView) findViewById(R.id.NoteName);
+        start = (Button) findViewById(R.id.start);
+        stop = (Button) findViewById(R.id.stop);
+
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start();
+            }
+        });
+
+        stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stop();
+            }
+        });
     }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-
-        thread = new Thread(new ExecuteSessionRunnable());
-        thread.start();
-
-    };
 
     public class ExecuteSessionRunnable implements Runnable {
 
@@ -68,31 +81,33 @@ public class SessionActivity extends BaseNavigationActivity {
                 Session s = gson.fromJson(sessionContent, Session.class);
 
                 for (final Session.Note note : s.Note) {
-                    try {
+                    if (!isStop) {
+                        try {
 
-                        tvNoteName.post(new Runnable() {
-                            public void run() {
-                                Animation anim_fade_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
-                                if (note.Show)
-                                    tvNoteName.setText(GetNoteText(note.Name));
-                                else
-                                    tvNoteName.setText("");
-                                tvNoteName.setBackgroundColor(Color.parseColor(GetColorCode(note.Name)));
-                                tvNoteName.setTextColor(Color.parseColor("#ffffff"));
-                                tvNoteName.startAnimation(anim_fade_in);
+                            tvNoteName.post(new Runnable() {
+                                public void run() {
+                                    Animation anim_fade_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
+                                    if (note.Show)
+                                        tvNoteName.setText(GetNoteText(note.Name));
+                                    else
+                                        tvNoteName.setText("");
+                                    tvNoteName.setBackgroundColor(Color.parseColor(GetColorCode(note.Name)));
+                                    tvNoteName.setTextColor(Color.parseColor("#ffffff"));
+                                    tvNoteName.startAnimation(anim_fade_in);
 
-                                if (mp != null) {
-                                    mp.release();
-                                    mp = null;
+                                    if (mp != null) {
+                                        mp.release();
+                                        mp = null;
+                                    }
+                                    mp = MediaPlayer.create(SessionActivity.this, GetNoteSoundId(note.Name));
+                                    mp.start();
                                 }
-                                mp = MediaPlayer.create(SessionActivity.this, GetNoteSoundId(note.Name));
-                                mp.start();
-                            }
-                        });
-                        Log.d("Ali", String.valueOf(note.Duration) + "___" + note.Name);
-                        Thread.sleep(note.Duration);
-                    } catch (InterruptedException ex) {
-                        Thread.currentThread().interrupt();
+                            });
+                            Log.d("Ali", String.valueOf(note.Duration) + "___" + note.Name);
+                            Thread.sleep(note.Duration);
+                        } catch (InterruptedException ex) {
+                            Thread.currentThread().interrupt();
+                        }
                     }
                 }
 
@@ -177,7 +192,7 @@ public class SessionActivity extends BaseNavigationActivity {
                 break;
             case "B":
             case "b":
-                NoteText ="B";
+                NoteText = "B";
                 break;
             case "C":
             case "c":
@@ -230,6 +245,8 @@ public class SessionActivity extends BaseNavigationActivity {
 
     @Override
     public void onBackPressed() {
+        isStop = true;
+
         super.onBackClicked(new Callable() {
             @Override
             public Object call() throws Exception {
@@ -237,7 +254,6 @@ public class SessionActivity extends BaseNavigationActivity {
             }
         }, null);
 
-        thread = null;
     }
 
     @Override
@@ -248,6 +264,8 @@ public class SessionActivity extends BaseNavigationActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        isStop = true;
+
         return super.onOptionsItemSelectedBase(item, true);
     }
 
@@ -256,5 +274,28 @@ public class SessionActivity extends BaseNavigationActivity {
     public boolean onNavigationItemSelected(MenuItem item) {
         super.onNavigationItemSelected(item, this);
         return true;
+    }
+
+    private void start() {
+        thread = new Thread(new ExecuteSessionRunnable());
+        thread.start();
+
+        start.post(new Runnable() {
+            public void run() {
+                start.setVisibility(View.GONE);
+            }
+        });
+        stop.post(new Runnable() {
+            public void run() {
+                stop.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    public void stop() {
+        isStop = true;
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 }

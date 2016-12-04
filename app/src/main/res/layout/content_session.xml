@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.tavous.eartraining.musicaleartraining.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/NoteName"
@@ -14,4 +9,28 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:textSize="100sp" />
+
+    <Button
+        android:id="@+id/start"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/ic_play_arrow_black_24dp"
+        android:textColor="#fff"
+        android:textSize="60sp" />
+
+    <Button
+        android:id="@+id/stop"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/ic_stop_black_24dp"
+        android:textColor="#fff"
+        android:textSize="60sp"
+        android:visibility="gone" />
+
 </RelativeLayout>
