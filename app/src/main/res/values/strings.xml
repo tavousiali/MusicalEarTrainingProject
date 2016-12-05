@@ -11,4 +11,11 @@
     <string name="title_activity_contactus">تماس با ما</string>
     <string name="title_activity_similarapp">برنامه های مشابه</string>
     <string name="title_activity_mainpage">صفحه نخست</string>
+    <string name="contactus">برای تماس با مدیر برنامه از دو طریق زیر اقدام کنید.</string>
+    <string name="email_address">tavousi.ali@gmail.com</string>
+    <string name="email">ایمیل:</string>
+    <string name="telegram">تلگرام:</string>
+    <string name="telegram_address">https://telegram.me/tavousiali</string>
+    <string name="dialog_title">خطا</string>
+    <string name="dialog_message">برای نمایش محصولات مشابه، اتصال اینترنتی خود را برقرار نمایید.</string>
 </resources>

@@ -104,25 +104,25 @@ public abstract class BaseNavigationActivity extends AppCompatActivity implement
                 e.printStackTrace();
             }
         }
-//        else if (id == R.id.about) {
-//            try {
-//                startActivity(new Intent(context, AboutActivity.class));
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        } else if (id == R.id.contactus) {
-//            try {
-//                startActivity(new Intent(context, ContactusActivity.class));
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        } else if (id == R.id.similarapp) {
-//            try {
-//                startActivity(new Intent(context, SimilarAppActivity.class));
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
+        else if (id == R.id.about) {
+            try {
+                startActivity(new Intent(context, AboutActivity.class));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (id == R.id.contactus) {
+            try {
+                startActivity(new Intent(context, ContactusActivity.class));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (id == R.id.similarapp) {
+            try {
+                startActivity(new Intent(context, SimilarAppActivity.class));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void onCreateOptionsMenuBase(Menu menu, boolean isBackButton) {

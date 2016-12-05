@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tavous.eartraining.musicaleartraining">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".fonts"
         android:allowBackup="true"
@@ -21,9 +24,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SessionActivity"
+            android:name=".AboutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/title_activity_contactus"></activity>
+            android:label="@string/title_activity_about" />
+        <activity
+            android:name=".ContactusActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_contactus" />
+        <activity
+            android:name=".SimilarAppActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_similarapp"></activity>
     </application>
 
 </manifest>
