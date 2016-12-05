@@ -24,6 +24,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".SessionActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_contactus"></activity>
+        <activity
             android:name=".AboutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_about" />

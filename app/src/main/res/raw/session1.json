@@ -1,0 +1,84 @@
+{
+  "Note": [
+    {
+      "Name": "C",
+      "Duration": 2000,
+      "Show": true
+    },
+    {
+      "Name": "D",
+      "Duration": 2000,
+      "Show": true
+    },
+    {
+      "Name": "E",
+      "Duration": 2000,
+      "Show": true
+    },
+    {
+      "Name": "F",
+      "Duration": 2000,
+      "Show": true
+    },
+    {
+      "Name": "G",
+      "Duration": 2000,
+      "Show": true
+    },
+    {
+      "Name": "A",
+      "Duration": 2000,
+      "Show": true
+    },
+    {
+      "Name": "B",
+      "Duration": 2000,
+      "Show": true
+    },
+    {
+      "Name": "C2",
+      "Duration": 2000,
+      "Show": true
+    },
+    {
+      "Name": "C",
+      "Duration": 2000,
+      "Show": false
+    },
+    {
+      "Name": "D",
+      "Duration": 2000,
+      "Show": false
+    },
+    {
+      "Name": "E",
+      "Duration": 2000,
+      "Show": false
+    },
+    {
+      "Name": "F",
+      "Duration": 2000,
+      "Show": false
+    },
+    {
+      "Name": "G",
+      "Duration": 2000,
+      "Show": false
+    },
+    {
+      "Name": "A",
+      "Duration": 2000,
+      "Show": false
+    },
+    {
+      "Name": "B",
+      "Duration": 2000,
+      "Show": false
+    },
+    {
+      "Name": "C2",
+      "Duration": 2000,
+      "Show": false
+    }
+  ]
+}

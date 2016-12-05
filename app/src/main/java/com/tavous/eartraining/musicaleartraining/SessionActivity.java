@@ -72,7 +72,12 @@ public class SessionActivity extends BaseNavigationActivity {
         @Override
         public void run() {
 
-            InputStream session = getResources().openRawResource(R.raw.session1);
+            InputStream session = null;
+            try {
+                session = getAssets().open("sessions/session1.json");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             try {
                 String sessionContent = inputStreamToString(session);
