@@ -6,17 +6,12 @@
       "Show": true
     },
     {
-      "Name": "D",
+      "Name": "G",
       "Duration": 2000,
       "Show": true
     },
     {
-      "Name": "E",
-      "Duration": 2000,
-      "Show": true
-    },
-    {
-      "Name": "F",
+      "Name": "C",
       "Duration": 2000,
       "Show": true
     },
@@ -26,12 +21,17 @@
       "Show": true
     },
     {
-      "Name": "A",
+      "Name": "C",
       "Duration": 2000,
       "Show": true
     },
     {
-      "Name": "B",
+      "Name": "C2",
+      "Duration": 2000,
+      "Show": true
+    },
+    {
+      "Name": "C",
       "Duration": 2000,
       "Show": true
     },

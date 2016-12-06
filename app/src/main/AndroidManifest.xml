@@ -26,7 +26,11 @@
         <activity
             android:name=".SessionActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/title_activity_contactus"></activity>
+            android:label="@string/title_activity_contactus" />
+        <activity
+            android:name=".LessonActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_contactus" />
         <activity
             android:name=".AboutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -38,7 +42,7 @@
         <activity
             android:name=".SimilarAppActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/title_activity_similarapp"></activity>
+            android:label="@string/title_activity_similarapp" />
     </application>
 
 </manifest>

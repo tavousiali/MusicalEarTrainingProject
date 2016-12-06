@@ -24,7 +24,7 @@ public class MainActivity extends BaseNavigationActivity {
         session1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SessionActivity.class);
+                Intent intent = new Intent(MainActivity.this, LessonActivity.class);
                 startActivity(intent);
             }
         });
