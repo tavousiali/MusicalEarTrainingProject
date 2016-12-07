@@ -324,8 +324,8 @@ public class LessonActivity extends BaseNavigationActivity {
 
     public void stop() {
         isStop = true;
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
+//        Intent intent = getIntent();
+//        finish();
+//        startActivity(intent);
     }
 }
