@@ -1,6 +1,7 @@
 package com.tavous.eartraining.musicaleartraining;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -39,10 +41,10 @@ public class RecyclerAdapterMainActivity extends RecyclerView.Adapter<RecyclerAd
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
         Picasso.with(context)
-                .load("file:///android_asset/lesson_images/"+ items.get(position).Name +".jpg")
+                .load("file:///android_asset/lesson_images/" + items.get(position).Name + ".jpg")
                 .error(R.drawable.image_pre_view)
                 .placeholder(R.drawable.image_pre_view)
                 .into(holder.thumbnail);
@@ -52,13 +54,19 @@ public class RecyclerAdapterMainActivity extends RecyclerView.Adapter<RecyclerAd
         //setAnimation(holder.cardView, position);
         //setScaleAnimation(holder.cardView);
         setFadeAnimation(holder.cardView);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, LessonActivity.class);
+                intent.putExtra("LessonName", items.get(position).Name);
+                context.startActivity(intent);
+            }
+        });
     }
 
-    private void setAnimation(View viewToAnimate, int position)
-    {
+    private void setAnimation(View viewToAnimate, int position) {
         // If the bound view wasn't previously displayed on screen, it's animated
-        if (position > lastPosition)
-        {
+        if (position > lastPosition) {
             Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
             viewToAnimate.startAnimation(animation);
             lastPosition = position;

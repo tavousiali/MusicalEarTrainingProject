@@ -71,10 +71,12 @@ public class LessonActivity extends BaseNavigationActivity {
 
         @Override
         public void run() {
+            Intent intent = getIntent();
+            String lessonName = intent.getStringExtra("LessonName");
 
             InputStream lesson = null;
             try {
-                lesson = getAssets().open("lessons/lesson1.json");
+                lesson = getAssets().open("lessons/" + lessonName + ".json");
             } catch (IOException e) {
                 e.printStackTrace();
             }
